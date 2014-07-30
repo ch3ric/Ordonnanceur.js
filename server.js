@@ -18,31 +18,13 @@ app.configure(function () {
     app.use(express.methodOverride()); 					// simulate DELETE and PUT
 });
 
-//Define schema
-var commandSchema = mongoose.Schema({
-    name: String,
-    api_url: String,
-    api_post_parameters: String,
-    max_time: Number,
-    stop_on_error: Boolean,
-    retry_on_error: Boolean,
-    nb_try: Number
-
-})
-
-var workflowSchema = mongoose.Schema({
-    name: String,
-    max_time: Number,
-    commands: [commandSchema]
-});
-
-var Workflow = mongoose.model('Workflow', workflowSchema);
+require('./models/workflow.js').make(mongoose);
 
 
 // routes ======================================================================
 // New workflow
 app.post('/api/workflows', function (req, res) {
-    Workflow.create({
+    model.Workflow.create({
         name: req.body.name,
         max_time: req.body.max_time
     }, function (err, workflow) {
