@@ -18,19 +18,30 @@ app.configure(function () {
     app.use(express.methodOverride()); 					// simulate DELETE and PUT
 });
 
-require('./models/workflow.js').make(mongoose);
+var Workflow = require('./models/workflow.js').make(mongoose);
 
 
 // routes ======================================================================
 // New workflow
 app.post('/api/workflows', function (req, res) {
-    model.Workflow.create({
+    Workflow.create({
         name: req.body.name,
         max_time: req.body.max_time
     }, function (err, workflow) {
         if (err)
             res.send(err);
         res.json(workflow);
+    });
+});
+
+// get all workflows
+app.get('/api/workflows', function (req, res) {
+    // use mongoose to get all posts in the database
+    Workflow.find(function (err, workflows) {
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+            res.send(err)
+        res.json(workflows); // return all posts in JSON format
     });
 });
 

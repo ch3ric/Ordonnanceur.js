@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('page2vieApp', [
+var app = angular.module('OrdonnanceurApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -11,8 +11,8 @@ var app = angular.module('page2vieApp', [
 app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-          templateUrl: 'views/posts.html',
-          controller: 'PostsCtrl'
+          templateUrl: 'views/index.html',
+          controller: 'IndexCtrl'
       })
       .otherwise({
         redirectTo: '/'

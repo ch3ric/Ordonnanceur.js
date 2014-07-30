@@ -17,7 +17,7 @@ function make(mongoose) {
         commands: [commandSchema]
     });
 
-    mongoose.model('Workflow', workflowSchema);
+    return mongoose.model('Workflow', workflowSchema);
 }
 
 module.exports.make = make;
