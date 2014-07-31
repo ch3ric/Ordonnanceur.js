@@ -9,7 +9,8 @@ var port = argv.p ? argv.p : 8080;
 
 // configuration =================
 
-mongoose.connect('localhost:27017/ordonnanceur');
+mongoose.connect('mongodb://localhost:27017/ordonnanceur');
+
 
 app.configure(function () {
     app.use(express.static(__dirname + '/app')); 		// set the static files location /public/img will be /img for users
@@ -18,7 +19,9 @@ app.configure(function () {
     app.use(express.methodOverride()); 					// simulate DELETE and PUT
 });
 
-var Workflow = require('./models/workflow.js').make(mongoose);
+
+
+Workflow = require('./models/workflow.js').make(mongoose);
 
 
 // routes ======================================================================
@@ -39,8 +42,9 @@ app.get('/api/workflows', function (req, res) {
     // use mongoose to get all posts in the database
     Workflow.find(function (err, workflows) {
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err)
-            res.send(err)
+        if (err) {
+            res.send(err);
+        }
         res.json(workflows); // return all posts in JSON format
     });
 });
