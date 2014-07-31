@@ -10,11 +10,15 @@ var app = angular.module('OrdonnanceurApp', [
 
 app.config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-          templateUrl: 'views/index.html',
-          controller: 'IndexCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+        .when('/', {
+            templateUrl: 'views/index.html',
+            controller: 'IndexCtrl'
+        })
+        .when('/workflow/:id', {
+            templateUrl: 'views/workflow.html',
+            controller: 'WorkflowCtrl'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
 });

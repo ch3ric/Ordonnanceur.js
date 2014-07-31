@@ -37,6 +37,17 @@ app.post('/api/workflows', function (req, res) {
     });
 });
 
+app.get('/api/workflows/:id', function (req, res) {
+    Workflow.find({
+        _id: req.params.id
+    }, function (err, workflow) {
+        if (err)
+            res.send(err);
+
+        res.json(workflow);
+    });
+});
+
 // get all workflows
 app.get('/api/workflows', function (req, res) {
     // use mongoose to get all posts in the database

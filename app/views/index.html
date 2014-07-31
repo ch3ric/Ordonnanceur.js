@@ -8,6 +8,7 @@
         </tr>
         <tr ng-repeat="workflow in workflows">
             <td>{{ workflow.name }}</td>
+            <td><a href="#/workflow/{{workflow._id}}"><span title="Show details" class="glyphicon glyphicon-share-alt"></span></a></td>
         </tr>
     </table>
 </div>
